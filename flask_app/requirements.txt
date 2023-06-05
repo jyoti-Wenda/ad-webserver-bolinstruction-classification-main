@@ -1,0 +1,4 @@
+Flask
+werkzeug
+gunicorn
+celery[redis]

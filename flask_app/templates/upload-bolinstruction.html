@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+   <body>
+      <h3>Upload your BOL INSTRUCTION document here</h3>
+      <form action = "{{ url_for('bolinstruction.async_uploader') }}" method = "POST" 
+         enctype = "multipart/form-data">
+         File to upload: <input type = "file" name = "file" /><br/>
+         User company: <input type = "text" name = "user" /><br/>
+         Save to cloud repository: <input type="checkbox" name="save" value="save" /><br/>
+         Output file to return: <input type="text" name="output" /><br/>
+         Webhook to send the file to: <input type="text" name="webhook" /><br/>
+         Pathfile: <input type="text" name="pathfile" /><br/>
+         Localpath: <input type="text" name="localpath" /><br/>
+         <input type = "submit"/>
+      </form>   
+   </body>
+</html>

@@ -1,0 +1,36 @@
+version: "3.7"
+services:
+
+  flask_app:
+    build: './flask_app'
+    restart: unless-stopped
+    ports:
+      - "6011:5000"
+    depends_on:
+      - rabbit
+    volumes:
+      - Datavolume:/flask_app/files
+
+  rabbit:
+    build: './rabbitmq'
+    restart: unless-stopped
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+    ports:
+      - "15683:15672"
+      - "5683:5672"
+      - "1894:1883"
+
+  ml_worker:
+    build: './ml_worker'
+    restart: unless-stopped
+    user: nobody
+    depends_on:
+      - rabbit
+      - flask_app
+    volumes:
+      - Datavolume:/flask_app/files
+
+volumes:
+  Datavolume:
